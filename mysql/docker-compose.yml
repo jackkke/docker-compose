@@ -1,0 +1,22 @@
+version: '3'
+services:
+  mysql:
+    image: mysql:8
+    container_name: aiman-mysql
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: asiainfo_root
+#   redis:
+#     image: redis:6
+#     container_name: aiman-redis
+#     restart: always
+#     ports:
+#       - 16379:6379
+#     networks:
+#       - net_db
+#     command:
+#       redis-server --appendonly yes --requirepass "asiainfo"
+networks:
+  net_db:
+    driver: bridge

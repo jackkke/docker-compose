@@ -1,0 +1,38 @@
+version: "3"
+networks:
+    rabbit:
+        external:
+            name: rabbitmqnet
+services:
+    rabbitmq2:
+        image: rabbitmq:management
+        ports:
+            - "4001:4369"
+            - "5001:5671"
+            - "20001:25672"
+            - "5101:5672"
+            - "10001:15672"
+        container_name: rabbitmq2
+        hostname: rabbitmq2
+        networks:
+            - rabbit
+        environment:
+            RABBITMQ_NODENAME: rabbitmq2
+            RABBITMQ_ERLANG_COOKIE: CURIOAPPLICATION
+        volumes:
+            - ./rabbitmq.sh:/home/rabbitmq.sh
+    rabbitmq3:
+        image: rabbitmq:management
+        ports:
+            - "4002:4369"
+            - "5002:5671"
+            - "20002:25672"
+            - "5102:5672"
+            - "10002:15672"
+        container_name: rabbitmq3
+        hostname: rabbitmq3
+        networks:
+            - rabbit
+        environment:
+            RABBITMQ_NODENAME: rabbitmq3
+            RABBITMQ_ERLANG-COOKIE: CURIOAPPLICATION
