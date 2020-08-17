@@ -6,62 +6,33 @@ networks:
 services:
     # 第一个节点
     rabbitmq-container1:
-        container_name: rabbitmq1
+        container_name: rabbitmq_master
         image: rabbitmq:management
-        hostname: rabbitmq1host
+        # hostname: jackkke.local
         ports:
             - "4369:4369"
             - "5671:5671"
             - "25672:25672"
             - "5672:5672"
             - "15672:15672"
-        volumes:
-            - ./rabbitmq1data:/var/lib/rabbitmq
-            - ./rabbitmq1data/rabbitmq.sh:/home/rabbitmq.sh
         environment:
-            RABBITMQ_NODENAME: rabbitmqnode1
-            RABBITMQ_DEFAULT_USER: root
-            RABBITMQ_DEFAULT_PASS: root
-            ERLANG-COOKIE: rabbitmqcookie
-            RABBITMQ_DEFAULT_VHOST: /my_host
-            # HOSTNAME: rabbitmq1host
+            RABBITMQ_NODENAME: mqmaster
+            RABBITMQ_ERLANG_COOKIE: myerlangcookie
         networks:
             - rabbit
     # 第二个节点
     rabbitmq-container2:
-        container_name: rabbitmq2
+        container_name: rabbitmq_slave1
         image: rabbitmq:management
-        hostname: rabbitmq2host
-        depends_on: [ rabbitmq-container1 ]
+        # hostname: jackkke.local
         ports:
             - "4368:4369"
             - "5670:5671"
             - "25673:25672"
             - "5673:5672"
             - "15673:15672"
-        volumes:
-            - ./rabbitmq2data:/var/lib/rabbitmq
-            - ./rabbitmq2data/rabbitmq.sh:/home/rabbitmq.sh
         environment:
-            RABBITMQ_NODENAME: rabbitmqnode2
-            RABBITMQ_DEFAULT_USER: root
-            RABBITMQ_DEFAULT_PASS: root
-            ERLANG-COOKIE: rabbitmqcookie
-            RABBITMQ_DEFAULT_VHOST: /my_host
-            CLUSTERED: true
-            CLUSTER_WITH: rabbitmq-container1
-            RAM_NODE: true
+            RABBITMQ_NODENAME: mqslave1
+            RABBITMQ_ERLANG_COOKIE: myerlangcookie
         networks:
             - rabbit
-        # links:
-        #     - rabbitmq-container1:rabbitmq1host
-
-
-
-    #   docker run -d --hostname rabbit1 --name myrabbit1 -p 15672:15672 -p 5672:5672 -e RABBITMQ_ERLANG_COOKIE='rabbitcookie' rabbitmq:3.7.8-management
-    #   　　②
-      
-    #   docker run -d --hostname rabbit2 --name myrabbit2 -p 5673:5672 -p 15673:15672 --link myrabbit1:rabbit1 -e RABBITMQ_ERLANG_COOKIE='rabbitcookie' rabbitmq:3.7.8-management
-    #   　　③
-      
-    #   docker run -d --hostname rabbit3 --name myrabbit3 -p 5674:5672 -p 15674:15672 --link myrabbit1:rabbit1 --link myrabbit2:rabbit2 -e RABBITMQ_ERLANG_COOKIE='rabbitcookie' rabbitmq:3.7.8-management
