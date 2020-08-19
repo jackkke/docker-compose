@@ -1,0 +1,28 @@
+version: '3'
+services:
+    # 第一个节点
+    rabbitmq-container1:
+        container_name: rabbitmq_master
+        image: rabbitmq:management
+        ports:
+            - "4369:4369"
+            - "5671:5671"
+            - "25672:25672"
+            - "5672:5672"
+            - "15672:15672"
+        environment:
+            RABBITMQ_NODENAME: mqmaster
+            RABBITMQ_ERLANG_COOKIE: myerlangcookie
+    # 第二个节点
+    rabbitmq-container2:
+        container_name: rabbitmq_slave1
+        image: rabbitmq:management
+        ports:
+            - "4368:4369"
+            - "5670:5671"
+            - "25673:25672"
+            - "5673:5672"
+            - "15673:15672"
+        environment:
+            RABBITMQ_NODENAME: mqslave1
+            RABBITMQ_ERLANG_COOKIE: myerlangcookie

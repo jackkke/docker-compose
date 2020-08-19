@@ -4,35 +4,42 @@ networks:
         external:
             name: rabbitmqnet
 services:
-    # 第一个节点
     rabbitmq-container1:
         container_name: rabbitmq_master
         image: rabbitmq:management
-        # hostname: jackkke.local
+        hostname: rabbitmq_host
         ports:
-            - "4369:4369"
-            - "5671:5671"
-            - "25672:25672"
             - "5672:5672"
             - "15672:15672"
         environment:
             RABBITMQ_NODENAME: mqmaster
             RABBITMQ_ERLANG_COOKIE: myerlangcookie
         networks:
-            - rabbit
-    # 第二个节点
+            rabbit:
+                ipv4_address: 192.168.6.2
     rabbitmq-container2:
         container_name: rabbitmq_slave1
         image: rabbitmq:management
-        # hostname: jackkke.local
+        hostname: rabbitmq_host1
         ports:
-            - "4368:4369"
-            - "5670:5671"
-            - "25673:25672"
             - "5673:5672"
             - "15673:15672"
         environment:
             RABBITMQ_NODENAME: mqslave1
             RABBITMQ_ERLANG_COOKIE: myerlangcookie
         networks:
-            - rabbit
+            rabbit:
+                ipv4_address: 192.168.6.3
+    rabbitmq-container3:
+        container_name: rabbitmq_slave2
+        image: rabbitmq:management
+        hostname: rabbitmq_host2
+        ports:
+            - "5674:5672"
+            - "15674:15672"
+        environment:
+            RABBITMQ_NODENAME: mqslave2
+            RABBITMQ_ERLANG_COOKIE: myerlangcookie
+        networks:
+            rabbit:
+                ipv4_address: 192.168.6.4
