@@ -1,0 +1,44 @@
+version: '3.6'
+services:
+  zoo1:
+    container_name: zookeeper1
+    image: zookeeper:3.6.2
+    restart: always
+    ports:
+      - "2181:2181"
+    volumes:
+      - "/Users/hangj/old-project/docker/docker-compose/zookeeper/zoo1/data:/data"
+      - "/Users/hangj/old-project/docker/docker-compose/zookeeper/zoo1/datalog:/datalog"
+    environment:
+      ZOO_MY_ID: 1
+      TZ: 'Asia/Shanghai'
+      ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2888:3888 server.3=zoo3:2888:3888
+      ZOO_4LW_COMMANDS_WHITELIST: "*"
+  zoo2:
+    container_name: zookeeper2
+    image: zookeeper:3.6.2
+    restart: always
+    ports:
+      - "2182:2181"
+    volumes:
+      - "/Users/hangj/old-project/docker/docker-compose/zookeeper/zoo2/data:/data"
+      - "/Users/hangj/old-project/docker/docker-compose/zookeeper/zoo2/datalog:/datalog"
+    environment:
+      ZOO_MY_ID: 2
+      TZ: 'Asia/Shanghai'
+      ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2888:3888 server.3=zoo3:2888:3888
+      ZOO_4LW_COMMANDS_WHITELIST: "*"
+  zoo3:
+    container_name: zookeeper3
+    image: zookeeper:3.6.2
+    restart: always
+    ports:
+      - "2183:2181"
+    volumes:
+      - "/Users/hangj/old-project/docker/docker-compose/zookeeper/zoo3/data:/data"
+      - "/Users/hangj/old-project/docker/docker-compose/zookeeper/zoo3/datalog:/datalog"
+    environment:
+      ZOO_MY_ID: 3
+      TZ: 'Asia/Shanghai'
+      ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2888:3888 server.3=zoo3:2888:3888
+      ZOO_4LW_COMMANDS_WHITELIST: "*"
