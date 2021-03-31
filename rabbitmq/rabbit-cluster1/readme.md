@@ -31,6 +31,9 @@ name：随便取，策略名称
 Pattern：^ 匹配符，只有一个^代表匹配所有
 Definition：ha-mode=all 为匹配类型，分为3种模式：all（表示所有的queue）
 
+
+rabbitmqctl set_policy ha-all "^" '{"ha-mode":"all"}'
+
 # Spring Cloud 集群配置
 
 ```properties

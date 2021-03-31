@@ -1,0 +1,12 @@
+version: '3'
+services:
+    rabbitmq-container1:
+        container_name: rabbitmq_master
+        image: rabbitmq:management
+        hostname: rabbitmq_host
+        ports:
+            - "5672:5672"
+            - "15672:15672" # master 需要加
+        environment:
+            RABBITMQ_NODENAME: mqmaster
+            RABBITMQ_ERLANG_COOKIE: myerlangcookie
