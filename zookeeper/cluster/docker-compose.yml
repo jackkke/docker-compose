@@ -7,8 +7,8 @@ services:
     ports:
       - "2181:2181"
     volumes:
-      - "/Users/hangj/old-project/docker/docker-compose/zookeeper/zoo1/data:/data"
-      - "/Users/hangj/old-project/docker/docker-compose/zookeeper/zoo1/datalog:/datalog"
+      - "../../tempdata/zoo1/data:/data"
+      - "../../tempdata/zoo1/datalog:/datalog"
     environment:
       ZOO_MY_ID: 1
       TZ: 'Asia/Shanghai'
@@ -21,8 +21,8 @@ services:
     ports:
       - "2182:2181"
     volumes:
-      - "/Users/hangj/old-project/docker/docker-compose/zookeeper/zoo2/data:/data"
-      - "/Users/hangj/old-project/docker/docker-compose/zookeeper/zoo2/datalog:/datalog"
+      - "../../tempdata/zoo2/data:/data"
+      - "../../tempdata/zoo2/datalog:/datalog"
     environment:
       ZOO_MY_ID: 2
       TZ: 'Asia/Shanghai'
@@ -35,8 +35,8 @@ services:
     ports:
       - "2183:2181"
     volumes:
-      - "/Users/hangj/old-project/docker/docker-compose/zookeeper/zoo3/data:/data"
-      - "/Users/hangj/old-project/docker/docker-compose/zookeeper/zoo3/datalog:/datalog"
+      - "../../tempdata/zoo3/data:/data"
+      - "../../tempdata/zoo3/datalog:/datalog"
     environment:
       ZOO_MY_ID: 3
       TZ: 'Asia/Shanghai'

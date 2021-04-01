@@ -6,5 +6,8 @@ services:
     restart: always
     ports:
       - "2181:2181"
+    volumes:
+      - "../../tempdata/zoo/data:/data"
+      - "../../tempdata/zoo/datalog:/datalog"
     environment:
       TZ: 'Asia/Shanghai'
