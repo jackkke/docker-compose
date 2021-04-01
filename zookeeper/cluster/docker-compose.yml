@@ -12,7 +12,7 @@ services:
     environment:
       ZOO_MY_ID: 1
       TZ: 'Asia/Shanghai'
-      ZOO_SERVERS: server.1=0.0.0.0:2888:3888;2181 server.2=zoo2:2888:3888;2181 server.3=zoo3:2888:3888;2181
+      ZOO_SERVERS: server.1=zoo1:2888:3888;2181 server.2=zoo2:2888:3888;2181 server.3=zoo3:2888:3888;2181
       ZOO_4LW_COMMANDS_WHITELIST: '*'
   zoo2:
     container_name: zookeeper2
@@ -26,7 +26,7 @@ services:
     environment:
       ZOO_MY_ID: 2
       TZ: 'Asia/Shanghai'
-      ZOO_SERVERS: server.1=zoo1:2888:3888;2181 server.2=0.0.0.0:2888:3888;2181 server.3=zoo3:2888:3888;2181
+      ZOO_SERVERS: server.1=zoo1:2888:3888;2181 server.2=zoo2:2888:3888;2181 server.3=zoo3:2888:3888;2181
       ZOO_4LW_COMMANDS_WHITELIST: '*'
   zoo3:
     container_name: zookeeper3
@@ -40,5 +40,5 @@ services:
     environment:
       ZOO_MY_ID: 3
       TZ: 'Asia/Shanghai'
-      ZOO_SERVERS: server.1=zoo1:2888:3888;2181 server.2=zoo2:2888:3888;2181 server.3=0.0.0.0:2888:3888;2181
+      ZOO_SERVERS: server.1=zoo1:2888:3888;2181 server.2=zoo2:2888:3888;2181 server.3=zoo3:2888:3888;2181
       ZOO_4LW_COMMANDS_WHITELIST: '*'

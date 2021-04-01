@@ -1,40 +1,57 @@
 version: '3.6'
 services:
   zoo1:
-    container_name: zookeeper1_aiman
+    container_name: zookeeper1
     image: zookeeper:3.6.2
     restart: always
     ports:
-      - "2181:2181"
+      - '2181:2181'
     volumes:
-      - "/Users/hangj/old-project/docker/docker-compose/kafka/zookeeper/zoo1/data:/data"
-      - "/Users/hangj/old-project/docker/docker-compose/kafka/zookeeper/zoo1/datalog:/datalog"
+      - '../../tempdata/zoo1/data:/data'
+      - '../../tempdata/zoo1/datalog:/datalog'
     environment:
       ZOO_MY_ID: 1
       TZ: 'Asia/Shanghai'
-      ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2888:3888
-      ZOO_4LW_COMMANDS_WHITELIST: "*"
+      ZOO_SERVERS: server.1=zoo1:2888:3888;2181 server.2=zoo2:2888:3888;2181 server.3=zoo3:2888:3888;2181
+      ZOO_4LW_COMMANDS_WHITELIST: '*'
   zoo2:
-    container_name: zookeeper2_aiman
+    container_name: zookeeper2
     image: zookeeper:3.6.2
     restart: always
     ports:
-      - "2182:2181"
+      - '2182:2181'
     volumes:
-      - "/Users/hangj/old-project/docker/docker-compose/kafka/zookeeper/zoo2/data:/data"
-      - "/Users/hangj/old-project/docker/docker-compose/kafka/zookeeper/zoo2/datalog:/datalog"
+      - '../../tempdata/zoo2/data:/data'
+      - '../../tempdata/zoo2/datalog:/datalog'
     environment:
       ZOO_MY_ID: 2
       TZ: 'Asia/Shanghai'
-      ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2888:3888
-      ZOO_4LW_COMMANDS_WHITELIST: "*"
-  kafka1:
-    container_name: kafka1_aiman
+      ZOO_SERVERS: server.1=zoo1:2888:3888;2181 server.2=zoo2:2888:3888;2181 server.3=zoo3:2888:3888;2181
+      ZOO_4LW_COMMANDS_WHITELIST: '*'
+  zoo3:
+    container_name: zookeeper3
+    image: zookeeper:3.6.2
+    restart: always
+    ports:
+      - '2183:2181'
+    volumes:
+      - '../../tempdata/zoo3/data:/data'
+      - '../../tempdata/zoo3/datalog:/datalog'
+    environment:
+      ZOO_MY_ID: 3
+      TZ: 'Asia/Shanghai'
+      ZOO_SERVERS: server.1=zoo1:2888:3888;2181 server.2=zoo2:2888:3888;2181 server.3=zoo3:2888:3888;2181
+      ZOO_4LW_COMMANDS_WHITELIST: '*'
+  kfk1:
+    container_name: kafka1
     image: wurstmeister/kafka:2.13-2.7.0
     restart: always
-    depends_on: [ zoo1,zoo2 ]
+    depends_on: [ zoo1,zoo2,zoo3 ]
     ports:
       - "9091:9092"
+    volumes:
+      - '../../tempdata/kfk1/:/kafka'
+      - '/var/run/docker.sock:/var/run/docker.sock'
     environment:
       TZ: 'Asia/Shanghai'
       KAFKA_BROKER_ID: 1
@@ -46,15 +63,18 @@ services:
       KAFKA_PORT: 9092
       # PLAINTEXT://:9092 等同于 PLAINTEXT://0.0.0.0:9092
       KAFKA_LISTENERS: PLAINTEXT://:9092
-      KAFKA_ZOOKEEPER_CONNECT: zoo1:2181,zoo2:2181
+      KAFKA_ZOOKEEPER_CONNECT: zoo1:2181,zoo2:2181,zoo3:2181
       KAFKA_CREATE_TOPICS: "aiman:1:1"
-  kafka2:
-    container_name: kafka2_aiman
+  kfk2:
+    container_name: kafka2
     image: wurstmeister/kafka:2.13-2.7.0
     restart: always
-    depends_on: [ zoo1,zoo2 ]
+    depends_on: [ zoo1,zoo2,zoo3 ]
     ports:
       - "9092:9092"
+    volumes:
+      - '../../tempdata/kfk2/:/kafka'
+      - '/var/run/docker.sock:/var/run/docker.sock'
     environment:
       TZ: 'Asia/Shanghai'
       KAFKA_BROKER_ID: 2
@@ -66,16 +86,37 @@ services:
       KAFKA_PORT: 9092
       # PLAINTEXT://:9092 等同于 PLAINTEXT://0.0.0.0:9092
       KAFKA_LISTENERS: PLAINTEXT://:9092
-      KAFKA_ZOOKEEPER_CONNECT: zoo1:2181,zoo2:2181
-      KAFKA_CREATE_TOPICS: "aiman:1:1"
-  kafdrop:
-    container_name: kafdrop_aiman
+      KAFKA_ZOOKEEPER_CONNECT: zoo1:2181,zoo2:2181,zoo3:2181
+  kfk3:
+    container_name: kafka3
+    image: wurstmeister/kafka:2.13-2.7.0
+    restart: always
+    depends_on: [ zoo1,zoo2,zoo3 ]
+    ports:
+      - "9093:9092"
+    volumes:
+      - '../../tempdata/kfk3/:/kafka'
+      - '/var/run/docker.sock:/var/run/docker.sock'
+    environment:
+      TZ: 'Asia/Shanghai'
+      KAFKA_BROKER_ID: 3
+      # 本机在局域网(内部访问)或外网IP(外网访问)
+      KAFKA_ADVERTISED_HOST_NAME: 10.1.68.177
+      KAFKA_ADVERTISED_PORT: 9093
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://10.1.68.177:9093
+      KAFKA_HOST_NAME: 0.0.0.0
+      KAFKA_PORT: 9092
+      # PLAINTEXT://:9092 等同于 PLAINTEXT://0.0.0.0:9092
+      KAFKA_LISTENERS: PLAINTEXT://:9092
+      KAFKA_ZOOKEEPER_CONNECT: zoo1:2181,zoo2:2181,zoo3:2181
+  kfdp:
+    container_name: kafdrop
     image: obsidiandynamics/kafdrop:3.27.0
     restart: always
-    depends_on: [ kafka1,kafka2 ]
+    depends_on: [ kfk1,kfk2,kfk3 ]
     ports:
       - "9000:9000"
     environment:
       TZ: 'Asia/Shanghai'
-      KAFKA_BROKERCONNECT: kafka1:9091,kafka2:9092
-      SERVER_SERVLET_CONTEXTPATH: "/aiman"
+      KAFKA_BROKERCONNECT: kfk1:9092,kfk2:9092,kfk3:9092
+      SERVER_SERVLET_CONTEXTPATH: "/kafka"

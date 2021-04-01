@@ -1,6 +1,6 @@
 version: '3.6'
 services:
-  zookeeper:
+  zoo:
     container_name: zookeeper
     image: zookeeper:3.6.2
     restart: always
