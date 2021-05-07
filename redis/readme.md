@@ -1,6 +1,3 @@
-
-
-
 docker network create --subnet 19.7.12.0/24 redisnet
 
 ```shell
