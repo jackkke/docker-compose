@@ -8,7 +8,7 @@ services:
     environment:
       TZ: 'Asia/Shanghai'
       GITLAB_OMNIBUS_CONFIG: |
-        external_url 'http://10.1.249.137:9716'
+        external_url 'http://10.1.249.137:80'
         gitlab_rails['time_zone'] = 'Asia/Shanghai'
         gitlab_rails['gitlab_shell_ssh_port'] = 9022
         gitlab_rails['gitlab_default_theme'] = 7
@@ -29,7 +29,7 @@ services:
         gitlab_rails['gitlab_email_display_name'] = 'aiman'
         # Add any other gitlab.rb configuration here, each on its own line
     ports:
-      - '9716:9716'
+      - '8080:80'
       - '9443:443'
       - '9022:22'
     volumes:
