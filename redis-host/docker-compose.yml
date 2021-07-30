@@ -1,7 +1,7 @@
-version: '3.7'
+version: '3.8'
 services:
     master:
-        image: redis:6.2.3
+        image: redis:6.2.4-alpine3.14
         container_name: redis-master
         network_mode: host
         command: redis-server /etc/redis/redis.conf
@@ -9,7 +9,7 @@ services:
             - ../tempdata/redis/redis1data:/data
             - ./conf/redis1.conf:/etc/redis/redis.conf
     slave1:
-        image: redis:6.2.3
+        image: redis:6.2.4-alpine3.14
         container_name: redis-slave-1
         network_mode: host
         command: redis-server /etc/redis/redis.conf
@@ -18,7 +18,7 @@ services:
             - ../tempdata/redis/redis2data:/data
             - ./conf/redis2.conf:/etc/redis/redis.conf
     slave2:
-        image: redis:6.2.3
+        image: redis:6.2.4-alpine3.14
         container_name: redis-slave-2
         network_mode: host
         command: redis-server /etc/redis/redis.conf
@@ -27,7 +27,7 @@ services:
             - ../tempdata/redis/redis3data:/data
             - ./conf/redis3.conf:/etc/redis/redis.conf
     sentinel1:
-        image: redis:6.2.3
+        image: redis:6.2.4-alpine3.14
         container_name: redis-sentinel-1
         network_mode: host
         restart: always
@@ -37,7 +37,7 @@ services:
             - ../tempdata/redis/redis-sentinel1data:/data
             - ./conf/sentinel1.conf:/etc/redis/sentinel.conf
     sentinel2:
-        image: redis:6.2.3
+        image: redis:6.2.4-alpine3.14
         container_name: redis-sentinel-2
         network_mode: host
         restart: always
@@ -47,7 +47,7 @@ services:
             - ../tempdata/redis/redis-sentinel2data:/data
             - ./conf/sentinel2.conf:/etc/redis/sentinel.conf
     sentinel3:
-        image: redis:6.2.3
+        image: redis:6.2.4-alpine3.14
         container_name: redis-sentinel-3
         network_mode: host
         restart: always

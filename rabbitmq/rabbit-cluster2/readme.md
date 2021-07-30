@@ -7,6 +7,7 @@ rabbitmqctl reset
 rabbitmqctl start_app
 exit
 ```
+
 # 设置节点2(内存节点)，加入到集群：
 
 ```sh
@@ -17,6 +18,7 @@ rabbitmqctl join_cluster --ram rabbit@rabbitmq_host1
 rabbitmqctl start_app
 exit
 ```
+
 # 设置节点3(内存节点)，加入到集群：
 
 ```sh

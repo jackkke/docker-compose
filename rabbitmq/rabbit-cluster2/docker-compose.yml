@@ -1,8 +1,8 @@
-version: '3'
+version: '3.8'
 services:
     rabbitmq-container1:
         container_name: rabbitmq_master
-        image: rabbitmq:management
+        image: rabbitmq:3.8.19-management-alpine
         hostname: rabbitmq_host
         ports:
             - "5672:5672"
@@ -12,7 +12,7 @@ services:
             RABBITMQ_ERLANG_COOKIE: myerlangcookie
     rabbitmq-container2:
         container_name: rabbitmq_slave1
-        image: rabbitmq:management
+        image: rabbitmq:3.8.19-management-alpine
         hostname: rabbitmq_host1
         ports:
             - "5673:5672"
@@ -27,7 +27,7 @@ services:
             - rabbitmq-container1:rabbitmq_host
     rabbitmq-container3:
         container_name: rabbitmq_slave2
-        image: rabbitmq:management
+        image: rabbitmq:3.8.19-management-alpine
         hostname: rabbitmq_host2
         ports:
             - "5674:5672"
