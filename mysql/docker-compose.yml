@@ -1,22 +1,18 @@
 version: '3'
 services:
   mysql:
-    image: mysql:8
+    image: mysql:${MYSQL_VERSION}
+    restart: always
     container_name: aiman-mysql
     ports:
       - 3306:3306
-    environment:
-      MYSQL_ROOT_PASSWORD: asiainfo_root
-#   redis:
-#     image: redis:6
-#     container_name: aiman-redis
-#     restart: always
-#     ports:
-#       - 16379:6379
-#     networks:
-#       - net_db
-#     command:
-#       redis-server --appendonly yes --requirepass "asiainfo"
-networks:
-  net_db:
-    driver: bridge
+    env_file:
+      - ../env/mysql.env
+    command:
+      # mysql:8 需要配置 --default-authentication-plugin=mysql_native_password
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_general_ci
+      --explicit_defaults_for_timestamp=true
+      --lower_case_table_names=1
+    volumes:
+      - ../temp/mysql/data:/var/lib/mysql
