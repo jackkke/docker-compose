@@ -1,0 +1,14 @@
+version: '${VERSION}'
+services:
+  portainer_service:
+    image: portainer/portainer-ce:${IMG_VERSION}
+    container_name: portainer-ce
+    restart: always
+    ports:
+      - 8000:8000
+      - 9000:9000
+      - 9443:9443
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./ddata/data:/data
+      - ./ddata/public:/public
