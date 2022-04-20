@@ -2,3 +2,5 @@ registry/
 .history/
 tempdata/
 temp/
+.idea/
+**/ddata/

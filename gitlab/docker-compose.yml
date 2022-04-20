@@ -1,38 +1,38 @@
-version: '3.8'
+version: '${VERSION}'
 services:
   gitlab:
-    image: 'gitlab/gitlab-ce:14.0.5-ce.0'
+    image: 'gitlab/gitlab-ce:${GITLAB_VERSION}'
     container_name: 'gitlab'
     restart: unless-stopped
-    hostname: '10.1.249.137'
+    hostname: '${HOSTNAME}'
     environment:
       TZ: 'Asia/Shanghai'
       GITLAB_OMNIBUS_CONFIG: |
-        external_url 'http://10.1.249.137:80'
+        external_url 'http://${HOSTNAME}:8001'
         gitlab_rails['time_zone'] = 'Asia/Shanghai'
-        gitlab_rails['gitlab_shell_ssh_port'] = 9022
+        gitlab_rails['gitlab_shell_ssh_port'] = 2201
         gitlab_rails['gitlab_default_theme'] = 7
-        gitlab_rails['initial_root_password'] = "asiainfo"
-        gitlab_rails['smtp_enable'] = true
-        gitlab_rails['smtp_address'] = "mail.asiainfo.com"
-        gitlab_rails['smtp_port'] = 25
-        gitlab_rails['smtp_user_name'] = "hangj@asiainfo.com"
-        gitlab_rails['smtp_password'] = "xxxxxxxxxxxxxxx"
-        gitlab_rails['smtp_domain'] = "mail.asiainfo.com"
-        gitlab_rails['smtp_authentication'] = "login"
-        gitlab_rails['smtp_enable_starttls_auto'] = true
-        gitlab_rails['smtp_tls'] = false
-        gitlab_rails['smtp_openssl_verify_mode'] = 'none'
-        gitlab_rails['gitlab_email_enabled'] = true
-        gitlab_rails['gitlab_email_from'] = 'hangj@asiainfo.com'
-        gitlab_rails['gitlab_email_reply_to'] = 'hangj@asiainfo.com'
-        gitlab_rails['gitlab_email_display_name'] = 'aiman'
+        gitlab_rails['initial_root_password'] = "jackkke.top"
+        # gitlab_rails['smtp_enable'] = true
+        # gitlab_rails['smtp_address'] = "mail.asiainfo.com"
+        # gitlab_rails['smtp_port'] = 25
+        # gitlab_rails['smtp_user_name'] = "hangj@asiainfo.com"
+        # gitlab_rails['smtp_password'] = "xxxxxxxxxxxxxxx"
+        # gitlab_rails['smtp_domain'] = "mail.asiainfo.com"
+        # gitlab_rails['smtp_authentication'] = "login"
+        # gitlab_rails['smtp_enable_starttls_auto'] = true
+        # gitlab_rails['smtp_tls'] = false
+        # gitlab_rails['smtp_openssl_verify_mode'] = 'none'
+        # gitlab_rails['gitlab_email_enabled'] = true
+        # gitlab_rails['gitlab_email_from'] = 'hangj@asiainfo.com'
+        # gitlab_rails['gitlab_email_reply_to'] = 'hangj@asiainfo.com'
+        # gitlab_rails['gitlab_email_display_name'] = 'aiman'
         # Add any other gitlab.rb configuration here, each on its own line
     ports:
-      - '8080:80'
-      - '9443:443'
-      - '9022:22'
+      - '8001:80'
+      - '4431:443'
+      - '2201:22'
     volumes:
-      - '/data/aiman/work-docker/gitlab/config:/etc/gitlab'
-      - '/data/aiman/work-docker/gitlab/logs:/var/log/gitlab'
-      - '/data/aiman/work-docker/gitlab/data:/var/opt/gitlab'
+      - './ddata/config:/etc/gitlab'
+      - './ddata/logs:/var/log/gitlab'
+      - './ddata/data:/var/opt/gitlab'
