@@ -1,18 +1,19 @@
-version: '3'
+version: '${VERSION}'
 services:
   mysql:
     image: mysql:${MYSQL_VERSION}
     restart: always
-    container_name: aiman-mysql
+    container_name: mysql
     ports:
       - 3306:3306
     env_file:
-      - ../env/mysql.env
+      - ./mysql.env
     command:
-      # mysql:8 需要配置 --default-authentication-plugin=mysql_native_password
+      # mysql:8 需要配置 
+      --default-authentication-plugin=mysql_native_password
       --character-set-server=utf8mb4
       --collation-server=utf8mb4_general_ci
       --explicit_defaults_for_timestamp=true
       --lower_case_table_names=1
     volumes:
-      - ../temp/mysql/data:/var/lib/mysql
+      - ./ddata/mysql:/var/lib/mysql
