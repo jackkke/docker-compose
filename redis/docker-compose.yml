@@ -1,7 +1,7 @@
-version: '3.8'
+version: '${VERSION}'
 services:
     master:
-        image: redis:6.2.4-alpine3.14
+        image: redis:${IMG_VERSION}
         container_name: redis-master
         restart: always
         command: redis-server /etc/redis/redis.conf
@@ -11,10 +11,10 @@ services:
         ports:
             - 6379:6379
         volumes:
-            - ../tempdata/redis/redis1data:/data
+            - ./ddata/redis1data:/data
             - ./conf/redis1.conf:/etc/redis/redis.conf
     slave1:
-        image: redis:6.2.4-alpine3.14
+        image: redis:${IMG_VERSION}
         container_name: redis-slave-1
         restart: always
         command: redis-server /etc/redis/redis.conf
@@ -25,10 +25,10 @@ services:
         ports:
             - 6380:6379
         volumes:
-            - ../tempdata/redis/redis2data:/data
+            - ./ddata/redis2data:/data
             - ./conf/redis2.conf:/etc/redis/redis.conf
     slave2:
-        image: redis:6.2.4-alpine3.14
+        image: redis:${IMG_VERSION}
         container_name: redis-slave-2
         restart: always
         command: redis-server /etc/redis/redis.conf
@@ -39,10 +39,10 @@ services:
         ports:
             - 6381:6379
         volumes:
-            - ../tempdata/redis/redis3data:/data
+            - ./ddata/redis3data:/data
             - ./conf/redis3.conf:/etc/redis/redis.conf
     sentinel1:
-        image: redis:6.2.4-alpine3.14
+        image: redis:${IMG_VERSION}
         container_name: redis-sentinel-1
         restart: always
         command: redis-sentinel /etc/redis/sentinel.conf
@@ -53,10 +53,10 @@ services:
         ports:
             - 26379:6379
         volumes:
-            - ../tempdata/redis/redis-sentinel1data:/data
+            - ./ddata/redis-sentinel1data:/data
             - ./conf/sentinel1.conf:/etc/redis/sentinel.conf
     sentinel2:
-        image: redis:6.2.4-alpine3.14
+        image: redis:${IMG_VERSION}
         container_name: redis-sentinel-2
         restart: always
         command: redis-sentinel /etc/redis/sentinel.conf
@@ -67,10 +67,10 @@ services:
         ports:
             - 26380:6379
         volumes:
-            - ../tempdata/redis/redis-sentinel2data:/data
+            - ./ddata/redis-sentinel2data:/data
             - ./conf/sentinel2.conf:/etc/redis/sentinel.conf
     sentinel3:
-        image: redis:6.2.4-alpine3.14
+        image: redis:${IMG_VERSION}
         container_name: redis-sentinel-3
         restart: always
         command: redis-sentinel /etc/redis/sentinel.conf
@@ -81,7 +81,7 @@ services:
         ports:
             - 26381:6379
         volumes:
-            - ../tempdata/redis/redis-sentinel3data:/data
+            - ./ddata/redis-sentinel3data:/data
             - ./conf/sentinel3.conf:/etc/redis/sentinel.conf
 networks:
     redis:
