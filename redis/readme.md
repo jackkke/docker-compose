@@ -29,6 +29,7 @@ repl_backlog_histlen:308
 ```shell
 /data # redis-cli
 127.0.0.1:6379> sentinel master mymaster
-
+# 返回主节点信息
 127.0.0.1:6379> sentinel slaves mymaster
+# 返回两个从节点信息
 ```
