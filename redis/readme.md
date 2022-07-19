@@ -1,7 +1,9 @@
+# 启动 docker-compose.yml 之前需要执行以下命令，创建网络
 docker network create --subnet 19.7.12.0/24 redisnet
 
+# 查看主从节点信息
 ```shell
-# redis-cli
+/data # redis-cli
 127.0.0.1:6379> auth test
 OK
 127.0.0.1:6379> info replication
@@ -23,7 +25,10 @@ repl_backlog_histlen:308
 ```
 
 
+# 查看哨兵节点跟追主从节点信息
+```shell
+/data # redis-cli
+127.0.0.1:6379> sentinel master mymaster
 
-sentinel master mymaster
-
-sentinel slaves mymaster
+127.0.0.1:6379> sentinel slaves mymaster
+```
