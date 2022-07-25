@@ -4,86 +4,60 @@ services:
         image: redis:${TAG}
         container_name: redis-master
         restart: always
-        command: redis-server /etc/redis/redis.conf
-        networks:
-            redis:
-                ipv4_address: 19.7.12.11
+        command: redis-server /etc/redis/redis1.conf
         ports:
             - 6379:6379
         volumes:
-            - ~/docker_data/redis/redis1data:/data
-            - ./conf/redis1.conf:/etc/redis/redis.conf
+            # Failed trying to load the MASTER synchronization DB from disk
+            # - ~/docker_data/redis/redis1data:/data
+            - ./conf:/etc/redis
     slave1:
         image: redis:${TAG}
         container_name: redis-slave-1
         restart: always
-        command: redis-server /etc/redis/redis.conf
-        networks:
-            redis:
-                ipv4_address: 19.7.12.12
+        command: redis-server /etc/redis/redis2.conf
         depends_on: [ master ]
         ports:
             - 6380:6379
         volumes:
-            - ~/docker_data/redis/redis2data:/data
-            - ./conf/redis2.conf:/etc/redis/redis.conf
+            - ./conf:/etc/redis
     slave2:
         image: redis:${TAG}
         container_name: redis-slave-2
         restart: always
-        command: redis-server /etc/redis/redis.conf
-        networks:
-            redis:
-                ipv4_address: 19.7.12.13
+        command: redis-server /etc/redis/redis3.conf
         depends_on: [ master ]
         ports:
             - 6381:6379
         volumes:
-            - ~/docker_data/redis/redis3data:/data
-            - ./conf/redis3.conf:/etc/redis/redis.conf
+            - ./conf:/etc/redis
     sentinel1:
         image: redis:${TAG}
         container_name: redis-sentinel-1
         restart: always
-        command: redis-sentinel /etc/redis/sentinel.conf
-        networks:
-            redis:
-                ipv4_address: 19.7.12.21
+        command: redis-sentinel /etc/redis/sentinel1.conf
         depends_on: [ master, slave1, slave2 ]
         ports:
             - 26379:6379
         volumes:
-            - ~/docker_data/redis/redis-sentinel1data:/data
-            - ./conf/sentinel1.conf:/etc/redis/sentinel.conf
+            - ./conf:/etc/redis
     sentinel2:
         image: redis:${TAG}
         container_name: redis-sentinel-2
         restart: always
-        command: redis-sentinel /etc/redis/sentinel.conf
-        networks:
-            redis:
-                ipv4_address: 19.7.12.22
+        command: redis-sentinel /etc/redis/sentinel2.conf
         depends_on: [ master, slave1, slave2 ]
         ports:
             - 26380:6379
         volumes:
-            - ~/docker_data/redis/redis-sentinel2data:/data
-            - ./conf/sentinel2.conf:/etc/redis/sentinel.conf
+            - ./conf:/etc/redis
     sentinel3:
         image: redis:${TAG}
         container_name: redis-sentinel-3
         restart: always
-        command: redis-sentinel /etc/redis/sentinel.conf
-        networks:
-            redis:
-                ipv4_address: 19.7.12.23
+        command: redis-sentinel /etc/redis/sentinel3.conf
         depends_on: [ master, slave1, slave2 ]
         ports:
             - 26381:6379
         volumes:
-            - ~/docker_data/redis/redis-sentinel3data:/data
-            - ./conf/sentinel3.conf:/etc/redis/sentinel.conf
-networks:
-    redis:
-        name: redisnet
-        external: true
+            - ./conf:/etc/redis
