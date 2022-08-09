@@ -16,4 +16,4 @@ services:
       --explicit_defaults_for_timestamp=true
       --lower_case_table_names=1
     volumes:
-      - ./ddata/mysql:/var/lib/mysql
+      - ~/docker_data/mysql:/var/lib/mysql
