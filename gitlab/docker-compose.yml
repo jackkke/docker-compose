@@ -10,9 +10,11 @@ services:
       GITLAB_OMNIBUS_CONFIG: |
         external_url 'http://${HOSTNAME}:8001'
         gitlab_rails['time_zone'] = 'Asia/Shanghai'
+        gitlab_rails['gitlab_ssh_host'] = '${HOSTNAME}'
         gitlab_rails['gitlab_shell_ssh_port'] = 2201
         gitlab_rails['gitlab_default_theme'] = 7
         gitlab_rails['initial_root_password'] = "jackkke.top"
+        puma['worker_processes'] = 2
         # gitlab_rails['smtp_enable'] = true
         # gitlab_rails['smtp_address'] = "mail.asiainfo.com"
         # gitlab_rails['smtp_port'] = 25
@@ -29,10 +31,11 @@ services:
         # gitlab_rails['gitlab_email_display_name'] = 'aiman'
         # Add any other gitlab.rb configuration here, each on its own line
     ports:
-      - '8001:80'
+      - '8001:8001'
       - '4431:443'
       - '2201:22'
     volumes:
-      - './ddata/config:/etc/gitlab'
-      - './ddata/logs:/var/log/gitlab'
-      - './ddata/data:/var/opt/gitlab'
+      - ~/docker_data/gitlab/config:/etc/gitlab
+      - ~/docker_data/gitlab/logs:/var/log/gitlab
+      - ~/docker_data/gitlab/data:/var/opt/gitlab
+    shm_size: '256m'
