@@ -1,0 +1,14 @@
+version: '${VERSION}'
+services:
+  nacos:
+    image: nacos/nacos-server:${NACOS_VERSION}
+    container_name: nacos-standalone-mysql
+    env_file:
+      - ./nacos-standlone-mysql.env
+    volumes:
+      - ~/docker_data/nacos/logs:/home/nacos/logs
+      - ./init.d/custom.properties:/home/nacos/init.d/custom.properties
+    ports:
+      - "8848:8848"
+      - "9848:9848"
+      - "9555:9555"
