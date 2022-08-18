@@ -1,0 +1,15 @@
+version: '${VERSION}'
+services:
+  confluence:
+    image: atlassian/confluence:${CONFLUENCE_VERSION}
+    restart: always
+    container_name: confluence
+    ports:
+      - 18090:8090
+      - 18091:8091
+    env_file:
+      - ./confluence.env
+    volumes:
+      - ~/docker_data/confluence:/var/atlassian/application-data/confluence
+      - ./mysql-connector-java-8.0.30.jar:/opt/atlassian/confluence/confluence/WEB-INF/lib/mysql-connector-java-8.0.30.jar
+      - ./atlassian-agent.jar:/opt/atlassian/atlassian-agent.jar
