@@ -3,6 +3,8 @@ services:
   nacos:
     image: nacos/nacos-server:${NACOS_VERSION}
     container_name: nacos-standalone-mysql
+    environment:
+      - MYSQL_SERVICE_HOST=${HOSTIP}
     env_file:
       - ./nacos-standlone-mysql.env
     volumes:

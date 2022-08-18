@@ -10,10 +10,10 @@
 * mysql.env 初始配置
 * init 初始化sql
   * nacos.sql Nacos 初始化sql
-    * nacos.sql内部nacos-data.sql 初始化命名空间与配置
+    * nacos.sql内部**nacos-data.sql** 初始化命名空间与配置
   * seata.sql Seata 初始化sql
 ### **你的**自定义配置
-nacos-data.sql，这部分需要主要将里面的 IP "192.168.33.37" 修改为你本地IP
+nacos-data.sql，这部分需要主要将里面的 IP "jdbc:mysql://192.168.33.37:3306" 修改为你本地IP
 ### 启动
 ```shell
 cd docker-compose\alibaba\mysql
@@ -57,7 +57,7 @@ docker compose up -d
 * nacos-standlone-mysql.env 初始配置，包括指定mysql信息等
 * init.d 初始化配置，可忽略
 ### **你的**自定义配置
-host.docker.internal 指向宿主机IP。如果启动失败，可以将此改为你本地IP
+.env HOSTIP=host.docker.internal 指向宿主机IP。如果启动失败，可以将此改为你本地IP
 ### 启动
 ```shell
 cd docker-compose\alibaba\nacos
@@ -111,7 +111,7 @@ Nacos is starting, you can docker logs your container
 * docker-compose.yml 启动脚本
 * seata-server/resources/application.yml 初始化配置
 ### **你的**自定义配置
-docker-compose.yml -> SEATA_IP 改为你本地IP
+.env -> HOSTIP=host.docker.internal 指向宿主机IP。如果启动失败，可以将此改为你本地IP
 application.yml -> server-addr 改为你本地IP
 ### 启动
 ```shell
