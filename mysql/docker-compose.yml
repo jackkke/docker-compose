@@ -8,12 +8,10 @@ services:
       - 3306:3306
     env_file:
       - ./mysql.env
-    command:
-      # mysql:8 需要配置 
-      --default-authentication-plugin=mysql_native_password
-      --character-set-server=utf8mb4
-      --collation-server=utf8mb4_general_ci
-      --explicit_defaults_for_timestamp=true
-      --lower_case_table_names=1
     volumes:
       - ~/docker_data/mysql:/var/lib/mysql
+      # 自定义cnf
+      # 注意 windows上面使用下面方式自定义配置，需要将目录里面的.cnf文件设置为只读（也有说将项目移至 用户目录下面即可，不如只读文件来的更好些）
+      - ./cnf:/etc/mysql/conf.d
+      # 自定义初始化sql
+      - ./init:/docker-entrypoint-initdb.d

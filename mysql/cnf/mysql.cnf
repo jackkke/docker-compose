@@ -1,0 +1,30 @@
+# For advice on how to change settings please see
+# http://dev.mysql.com/doc/refman/8.0/en/server-configuration-defaults.html
+
+[mysqld]
+character-set-server=utf8mb4
+collation-server=utf8mb4_general_ci
+explicit_defaults_for_timestamp=true
+lower_case_table_names=1
+init_connect='SET NAMES utf8mb4'
+sql_mode=TRADITIONAL
+max_allowed_packet=8M
+key_buffer_size=16M
+
+# mysql:8 需要配置
+default-authentication-plugin=mysql_native_password
+
+# 8.0.30开始 innodb_redo_log_capacity 替代 innodb_log_file_size
+innodb_log_file_size=2G
+innodb_redo_log_capacity=4294967296
+
+# read-uncommitted|read-committed|repeatale-read|serializable
+transaction_isolation='read-committed'
+
+
+[client]
+port=3306
+
+[mysqldump]
+quick
+max_allowed_packet = 16M
