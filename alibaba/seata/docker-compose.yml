@@ -4,6 +4,7 @@ services:
     image: seataio/seata-server:${SEATA_VERSION}
     hostname: seata-server
     container_name: seata-server
+    restart: always
     ports:
       - "8091:8091"
       - "7091:7091"

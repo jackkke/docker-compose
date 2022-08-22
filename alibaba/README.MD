@@ -49,6 +49,10 @@ docker compose up -d
 2022-08-17T08:16:43.251536Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Bind-address: '::' port: 33060, socket: /var/run/mysqld/mysqlx.sock
 2022-08-17T08:16:43.251641Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.30'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
 ```
+### 访问
+* localhost:3306
+* 账号密码：root/esafenet
+* 账号密码：nacos/nacos
 
 ## 启动 Nacos
 ### 文件与目录解释

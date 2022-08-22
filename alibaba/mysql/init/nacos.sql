@@ -223,21 +223,18 @@ INSERT INTO roles (username, role) VALUES ('nacos', 'ROLE_ADMIN');
 /******************************************/
 /*   nacos-data.sql   */
 /******************************************/
-
-INSERT INTO tenant_info (id, kp, tenant_id, tenant_name, tenant_desc, create_source, gmt_create, gmt_modified) VALUES (1, '1', 'seata', 'seata', 'seata', 'nacos', 1660721525891, 1660721525891);
-
-INSERT INTO nacos.config_info (id, data_id, group_id, content, md5, gmt_create, gmt_modified, src_user, src_ip, app_name, tenant_id, c_desc, c_use, effect, type, c_schema, encrypted_data_key) VALUES (1, 'seataServer.properties', 'SEATA_GROUP', 'store.mode=db
+INSERT INTO nacos.config_info (id, data_id, group_id, content, md5, gmt_create, gmt_modified, src_user, src_ip, app_name, tenant_id, c_desc, c_use, effect, type, c_schema, encrypted_data_key) VALUES (1, 'seataServer.properties', 'DEFAULT_GROUP', 'store.mode=db
 store.db.datasource=druid
 store.db.dbType=mysql
 store.db.driverClassName=com.mysql.cj.jdbc.Driver
 store.db.url=jdbc:mysql://192.168.33.37:3306/nacos?useUnicode=true&characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useSSL=false
 store.db.user=root
-store.db.password=esafenet', '0cc218bced88cc5c22675630f82a439b', '2022-08-17 07:43:28', '2022-08-17 07:43:28', null, '192.168.16.1', '', 'seata', 'seataServer.properties', null, null, 'properties', null, '');
+store.db.password=esafenet', '0cc218bced88cc5c22675630f82a439b', '2022-08-17 07:43:28', '2022-08-17 07:43:28', null, '192.168.16.1', '', '', 'seataServer.properties', null, null, 'properties', null, '');
 
-INSERT INTO nacos.his_config_info (id, nid, data_id, group_id, app_name, content, md5, gmt_create, gmt_modified, src_user, src_ip, op_type, tenant_id, encrypted_data_key) VALUES (0, 1, 'seataServer.properties', 'SEATA_GROUP', '', 'store.mode=db
+INSERT INTO nacos.his_config_info (id, nid, data_id, group_id, app_name, content, md5, gmt_create, gmt_modified, src_user, src_ip, op_type, tenant_id, encrypted_data_key) VALUES (0, 1, 'seataServer.properties', 'DEFAULT_GROUP', '', 'store.mode=db
 store.db.datasource=druid
 store.db.dbType=mysql
 store.db.driverClassName=com.mysql.cj.jdbc.Driver
 store.db.url=jdbc:mysql://192.168.33.37:3306/nacos?useUnicode=true&characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useSSL=false
 store.db.user=root
-store.db.password=esafenet', '0cc218bced88cc5c22675630f82a439b', '2022-08-17 07:43:27', '2022-08-17 07:43:28', null, '192.168.16.1', 'I', 'seata', '');
+store.db.password=esafenet', '0cc218bced88cc5c22675630f82a439b', '2022-08-17 07:43:27', '2022-08-17 07:43:28', null, '192.168.16.1', 'I', '', '');
