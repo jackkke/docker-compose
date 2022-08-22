@@ -1,6 +1,11 @@
 # Redis 主从集群哨兵集群逻辑网络模式
 
-# 查看主从节点信息
+## 使用
+* 将 .conf 内所有 IP 为 192.168.33.37 改为你本地IP
+* 执行 "docker compose up -d" 启动
+
+## 检查
+### 查看主从节点信息
 ```shell
 # 连接 redis server 默认 127.0.0.1 6379
 /data # redis-cli
@@ -12,8 +17,8 @@ OK
 # Replication 主
 role:master
 connected_slaves:2
-slave0:ip=192.168.130.172,port=6380,state=online,offset=798,lag=0
-slave1:ip=192.168.130.172,port=6381,state=online,offset=798,lag=1
+slave0:ip=host.docker.internal,port=6380,state=online,offset=798,lag=0
+slave1:ip=host.docker.internal,port=6381,state=online,offset=798,lag=1
 master_failover_state:no-failover
 master_replid:5b6c8191a38b899dfe3586268537553da9357be2
 master_replid2:0000000000000000000000000000000000000000
@@ -27,7 +32,7 @@ repl_backlog_histlen:798
 
 # Replication 从
 role:slave
-master_host:192.168.130.172
+master_host:192.168.33.37
 master_port:6379
 master_link_status:up
 master_last_io_seconds_ago:2
@@ -51,7 +56,7 @@ repl_backlog_histlen:868
 ```
 
 
-# 查看哨兵节点跟追主从节点信息
+### 查看哨兵节点跟追主从节点信息
 ```shell
 # 连接 redis server 默认 127.0.0.1 6379
 /data # redis-cli
@@ -66,13 +71,13 @@ sentinel_tilt:0
 sentinel_running_scripts:0
 sentinel_scripts_queue_length:0
 sentinel_simulate_failure_flags:0
-master0:name=mymaster,status=ok,address=192.168.130.172:6379,slaves=2,sentinels=3
+master0:name=mymaster,status=ok,address=192.168.33.37:6379,slaves=2,sentinels=3
 127.0.0.1:6379> sentinel master mymaster
 # 返回主节点信息
  1) "name"
  2) "mymaster"
  3) "ip"
- 4) "192.168.130.172"
+ 4) "192.168.33.37"
  5) "port"
  6) "6379"
  7) "runid"
@@ -112,9 +117,9 @@ master0:name=mymaster,status=ok,address=192.168.130.172:6379,slaves=2,sentinels=
 127.0.0.1:6379> sentinel slaves mymaster
 # 返回两个从节点信息
 1)  1) "name"
-    2) "192.168.130.172:6381"
+    2) "192.168.33.37:6381"
     3) "ip"
-    4) "192.168.130.172"
+    4) "192.168.33.37"
     5) "port"
     6) "6381"
     7) "runid"
@@ -144,7 +149,7 @@ master0:name=mymaster,status=ok,address=192.168.130.172:6379,slaves=2,sentinels=
    31) "master-link-status"
    32) "ok"
    33) "master-host"
-   34) "192.168.130.172"
+   34) "192.168.33.37"
    35) "master-port"
    36) "6379"
    37) "slave-priority"
@@ -154,9 +159,9 @@ master0:name=mymaster,status=ok,address=192.168.130.172:6379,slaves=2,sentinels=
    41) "replica-announced"
    42) "1"
 2)  1) "name"
-    2) "192.168.130.172:6380"
+    2) "192.168.33.37:6380"
     3) "ip"
-    4) "192.168.130.172"
+    4) "192.168.33.37"
     5) "port"
     6) "6380"
     7) "runid"
@@ -186,7 +191,7 @@ master0:name=mymaster,status=ok,address=192.168.130.172:6379,slaves=2,sentinels=
    31) "master-link-status"
    32) "ok"
    33) "master-host"
-   34) "192.168.130.172"
+   34) "192.168.33.37"
    35) "master-port"
    36) "6379"
    37) "slave-priority"
@@ -200,7 +205,7 @@ master0:name=mymaster,status=ok,address=192.168.130.172:6379,slaves=2,sentinels=
 
 
 
-# 问题
+## 问题
 * 主从节点警告信息
 > 1:S 25 Jul 2022 07:28:34.120 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
 ```shell
@@ -210,7 +215,7 @@ sysctl vm.overcommit_memory=1
 # 或者
 vi /etc/sysctl.conf
 # 文件末尾追加
-# vm.overcommit_memory = 1
+vm.overcommit_memory = 1
 # 执行命令配置生效
 sysctl -p
 ```
