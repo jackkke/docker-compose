@@ -1,0 +1,23 @@
+{
+  "port": "3000",
+  "adminAccount": "hangao1204@hotmail.com",
+  "timeout":120000,
+  "db": {
+    "servername": "mongo",
+    "DATABASE": "yapi",
+    "port": 27017,
+    "user": "yapi",
+    "pass": "12345678",
+    "authSource": ""
+  },
+  "mail": {
+    "enable": true,
+    "host": "smtp.gmail.com",
+    "port": 465,
+    "from": "*",
+    "auth": {
+      "user": "hexiaohei1024@gmail.com",
+      "pass": "xxx"
+    }
+  }
+}

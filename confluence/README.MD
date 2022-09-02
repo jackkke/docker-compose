@@ -5,6 +5,8 @@
 测试不通过版本 8.0.0-m023
 
 ## 启动
+
+> 注意，database 字符集 必须为 "utf8mb4_bin" 或 "utf8_bin"  
 ```cmd
 docker compose up -d
 ```

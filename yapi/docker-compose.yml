@@ -1,0 +1,28 @@
+version: ${VERSION}
+
+services:
+
+  yapi:
+    # image: yapipro/yapi:${YAPI_TAG}
+    image: jayfong/yapi:${YAPI_TAG}
+    restart: always
+    container_name: yapi
+    ports:
+      - 3000:3000
+    environment:
+      # 基础配置
+      YAPI_ADMIN_ACCOUNT: hangao1204@hotmail.com
+      YAPI_ADMIN_PASSWORD: 12345678
+      YAPI_CLOSE_REGISTER: false
+      YAPI_NPM_REGISTRY: https://registry.npm.taobao.org
+      # 数据库配置
+      YAPI_DB_SERVERNAME: host.docker.internal
+      YAPI_DB_PORT: 27017
+      YAPI_DB_DATABASE: yapi
+      YAPI_DB_USER: root
+      YAPI_DB_PASS: example
+      YAPI_DB_AUTH_SOURCE: admin
+      # 邮件配置
+      YAPI_MAIL_ENABLE: false
+      # 插件配置
+      YAPI_PLUGINS: "[]"
