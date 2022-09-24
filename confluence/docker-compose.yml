@@ -13,3 +13,7 @@ services:
       - ~/docker_data/confluence:/var/atlassian/application-data/confluence
       - ./mysql-connector-java-8.0.30.jar:/opt/atlassian/confluence/confluence/WEB-INF/lib/mysql-connector-java-8.0.30.jar
       - ./atlassian-agent.jar:/opt/atlassian/atlassian-agent.jar
+
+networks:
+  default:
+    name: zion
