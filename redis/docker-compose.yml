@@ -7,7 +7,7 @@ services:
         command: redis-server /etc/redis/redis1.conf
         networks:
             zion:
-                ipv4_address: 172.25.0.5
+                ipv4_address: 19.7.12.5
         ports:
             - 6379:6379
         volumes:
@@ -22,7 +22,7 @@ services:
         depends_on: [ master ]
         networks:
             zion:
-                ipv4_address: 172.25.0.6
+                ipv4_address: 19.7.12.6
         ports:
             - 6380:6379
         volumes:
@@ -35,7 +35,7 @@ services:
         depends_on: [ master ]
         networks:
             zion:
-                ipv4_address: 172.25.0.7
+                ipv4_address: 19.7.12.7
         ports:
             - 6381:6379
         volumes:
@@ -48,7 +48,7 @@ services:
         depends_on: [ master, slave1, slave2 ]
         networks:
             zion:
-                ipv4_address: 172.25.0.8
+                ipv4_address: 19.7.12.8
         ports:
             - 26379:6379
         volumes:
@@ -61,7 +61,7 @@ services:
         depends_on: [ master, slave1, slave2 ]
         networks:
             zion:
-                ipv4_address: 172.25.0.9
+                ipv4_address: 19.7.12.9
         ports:
             - 26380:6379
         volumes:
@@ -74,7 +74,7 @@ services:
         depends_on: [ master, slave1, slave2 ]
         networks:
             zion:
-                ipv4_address: 172.25.0.10
+                ipv4_address: 19.7.12.10
         ports:
             - 26381:6379
         volumes:
