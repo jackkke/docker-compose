@@ -1,9 +1,6 @@
 version: ${VERSION}
-
 services:
-
   yapi:
-    # image: yapipro/yapi:${YAPI_TAG}
     image: jayfong/yapi:${YAPI_TAG}
     restart: always
     container_name: yapi
@@ -16,7 +13,7 @@ services:
       YAPI_CLOSE_REGISTER: false
       YAPI_NPM_REGISTRY: https://registry.npm.taobao.org
       # 数据库配置
-      YAPI_DB_SERVERNAME: host.docker.internal
+      YAPI_DB_SERVERNAME: mongo
       YAPI_DB_PORT: 27017
       YAPI_DB_DATABASE: yapi
       YAPI_DB_USER: root
@@ -26,3 +23,7 @@ services:
       YAPI_MAIL_ENABLE: false
       # 插件配置
       YAPI_PLUGINS: "[]"
+
+networks:
+  default:
+    name: zion
