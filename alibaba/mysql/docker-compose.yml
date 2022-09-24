@@ -9,7 +9,7 @@ services:
     env_file:
       - ./mysql.env
     command:
-      # mysql:8 需要配置 
+      # mysql:8 需要配置
       --default-authentication-plugin=mysql_native_password
       --character-set-server=utf8mb4
       --collation-server=utf8mb4_general_ci
@@ -18,3 +18,7 @@ services:
     volumes:
       - ~/docker_data/mysql:/var/lib/mysql
       - ./init:/docker-entrypoint-initdb.d
+
+networks:
+  default:
+    name: zion

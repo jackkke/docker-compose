@@ -5,7 +5,7 @@ services:
     container_name: nacos-standalone-mysql
     restart: always
     environment:
-      - MYSQL_SERVICE_HOST=${HOSTIP}
+      - MYSQL_SERVICE_HOST=mysql
     env_file:
       - ./nacos-standlone-mysql.env
     volumes:
@@ -21,3 +21,7 @@ services:
     restart: always
     ports:
       - "8080:8858"
+
+networks:
+  default:
+    name: zion

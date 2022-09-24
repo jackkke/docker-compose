@@ -16,3 +16,7 @@ services:
       - SEATA_IP=${HOSTIP}
     volumes:
       - "./seata-server/resources/application.yml:/seata-server/resources/application.yml"
+
+networks:
+  default:
+    name: zion
