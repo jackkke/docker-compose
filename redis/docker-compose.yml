@@ -5,6 +5,9 @@ services:
         container_name: redis-master
         restart: always
         command: redis-server /etc/redis/redis1.conf
+        networks:
+            zion:
+                ipv4_address: 172.25.0.5
         ports:
             - 6379:6379
         volumes:
@@ -17,6 +20,9 @@ services:
         restart: always
         command: redis-server /etc/redis/redis2.conf
         depends_on: [ master ]
+        networks:
+            zion:
+                ipv4_address: 172.25.0.6
         ports:
             - 6380:6379
         volumes:
@@ -27,6 +33,9 @@ services:
         restart: always
         command: redis-server /etc/redis/redis3.conf
         depends_on: [ master ]
+        networks:
+            zion:
+                ipv4_address: 172.25.0.7
         ports:
             - 6381:6379
         volumes:
@@ -37,6 +46,9 @@ services:
         restart: always
         command: redis-sentinel /etc/redis/sentinel1.conf
         depends_on: [ master, slave1, slave2 ]
+        networks:
+            zion:
+                ipv4_address: 172.25.0.8
         ports:
             - 26379:6379
         volumes:
@@ -47,6 +59,9 @@ services:
         restart: always
         command: redis-sentinel /etc/redis/sentinel2.conf
         depends_on: [ master, slave1, slave2 ]
+        networks:
+            zion:
+                ipv4_address: 172.25.0.9
         ports:
             - 26380:6379
         volumes:
@@ -57,7 +72,14 @@ services:
         restart: always
         command: redis-sentinel /etc/redis/sentinel3.conf
         depends_on: [ master, slave1, slave2 ]
+        networks:
+            zion:
+                ipv4_address: 172.25.0.10
         ports:
             - 26381:6379
         volumes:
             - ./conf:/etc/redis
+
+networks:
+    zion:
+        external: true
