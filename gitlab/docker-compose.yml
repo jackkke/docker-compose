@@ -39,3 +39,12 @@ services:
       - ~/docker_data/gitlab/logs:/var/log/gitlab
       - ~/docker_data/gitlab/data:/var/opt/gitlab
     shm_size: '256m'
+    deploy:
+      resources:
+        limits:
+          memory: 1536M
+
+networks:
+  default:
+    name: zion
+    external: true

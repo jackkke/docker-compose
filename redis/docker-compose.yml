@@ -1,85 +1,85 @@
 version: '${VERSION}'
 services:
-    master:
-        image: redis:${TAG}
-        container_name: redis-master
-        restart: always
-        command: redis-server /etc/redis/redis1.conf
-        networks:
-            zion:
-                ipv4_address: 19.7.12.5
-        ports:
-            - 6379:6379
-        volumes:
-            # Failed trying to load the MASTER synchronization DB from disk
-            # - ~/docker_data/redis/redis1data:/data
-            - ./conf:/etc/redis
-    slave1:
-        image: redis:${TAG}
-        container_name: redis-slave-1
-        restart: always
-        command: redis-server /etc/redis/redis2.conf
-        depends_on: [ master ]
-        networks:
-            zion:
-                ipv4_address: 19.7.12.6
-        ports:
-            - 6380:6379
-        volumes:
-            - ./conf:/etc/redis
-    slave2:
-        image: redis:${TAG}
-        container_name: redis-slave-2
-        restart: always
-        command: redis-server /etc/redis/redis3.conf
-        depends_on: [ master ]
-        networks:
-            zion:
-                ipv4_address: 19.7.12.7
-        ports:
-            - 6381:6379
-        volumes:
-            - ./conf:/etc/redis
-    sentinel1:
-        image: redis:${TAG}
-        container_name: redis-sentinel-1
-        restart: always
-        command: redis-sentinel /etc/redis/sentinel1.conf
-        depends_on: [ master, slave1, slave2 ]
-        networks:
-            zion:
-                ipv4_address: 19.7.12.8
-        ports:
-            - 26379:6379
-        volumes:
-            - ./conf:/etc/redis
-    sentinel2:
-        image: redis:${TAG}
-        container_name: redis-sentinel-2
-        restart: always
-        command: redis-sentinel /etc/redis/sentinel2.conf
-        depends_on: [ master, slave1, slave2 ]
-        networks:
-            zion:
-                ipv4_address: 19.7.12.9
-        ports:
-            - 26380:6379
-        volumes:
-            - ./conf:/etc/redis
-    sentinel3:
-        image: redis:${TAG}
-        container_name: redis-sentinel-3
-        restart: always
-        command: redis-sentinel /etc/redis/sentinel3.conf
-        depends_on: [ master, slave1, slave2 ]
-        networks:
-            zion:
-                ipv4_address: 19.7.12.10
-        ports:
-            - 26381:6379
-        volumes:
-            - ./conf:/etc/redis
+  master:
+    image: redis:${TAG}
+    container_name: redis-master
+    restart: always
+    command: redis-server /etc/redis/redis1.conf
+    networks:
+      zion:
+        ipv4_address: 19.7.12.5
+    ports:
+      - 6379:6379
+    volumes:
+      # Failed trying to load the MASTER synchronization DB from disk
+      # - ~/docker_data/redis/redis1data:/data
+      - ./conf:/etc/redis
+  slave1:
+    image: redis:${TAG}
+    container_name: redis-slave-1
+    restart: always
+    command: redis-server /etc/redis/redis2.conf
+    depends_on: [ master ]
+    networks:
+      zion:
+        ipv4_address: 19.7.12.6
+    ports:
+      - 6380:6379
+    volumes:
+      - ./conf:/etc/redis
+  slave2:
+    image: redis:${TAG}
+    container_name: redis-slave-2
+    restart: always
+    command: redis-server /etc/redis/redis3.conf
+    depends_on: [ master ]
+    networks:
+      zion:
+        ipv4_address: 19.7.12.7
+    ports:
+      - 6381:6379
+    volumes:
+      - ./conf:/etc/redis
+  sentinel1:
+    image: redis:${TAG}
+    container_name: redis-sentinel-1
+    restart: always
+    command: redis-sentinel /etc/redis/sentinel1.conf
+    depends_on: [ master, slave1, slave2 ]
+    networks:
+      zion:
+        ipv4_address: 19.7.12.8
+    ports:
+      - 26379:6379
+    volumes:
+      - ./conf:/etc/redis
+  sentinel2:
+    image: redis:${TAG}
+    container_name: redis-sentinel-2
+    restart: always
+    command: redis-sentinel /etc/redis/sentinel2.conf
+    depends_on: [ master, slave1, slave2 ]
+    networks:
+      zion:
+        ipv4_address: 19.7.12.9
+    ports:
+      - 26380:6379
+    volumes:
+      - ./conf:/etc/redis
+  sentinel3:
+    image: redis:${TAG}
+    container_name: redis-sentinel-3
+    restart: always
+    command: redis-sentinel /etc/redis/sentinel3.conf
+    depends_on: [ master, slave1, slave2 ]
+    networks:
+      zion:
+        ipv4_address: 19.7.12.10
+    ports:
+      - 26381:6379
+    volumes:
+      - ./conf:/etc/redis
 
 networks:
-    zion:
-        external: true
+  zion:
+    external: true
