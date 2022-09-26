@@ -1,67 +1,11 @@
 # 基于 MySql 搭建 Nacos 与 Seata
 
-
-
-
-## 启动 MySql
-### 文件与目录解释
-* .env 文件指定镜像版本
-* docker-compose.yml 启动脚本
-* mysql.env 初始配置
-* init 初始化sql
-  * nacos.sql Nacos 初始化sql
-    * nacos.sql内部**nacos-data.sql** 初始化命名空间与配置
-  * seata.sql Seata 初始化sql
-### **你的**自定义配置
-nacos-data.sql，这部分需要主要将里面的 IP "jdbc:mysql://192.168.33.37:3306" 修改为你本地IP
-### 启动
-```shell
-cd docker-compose\alibaba\mysql
-docker compose up -d
-```
-### 启动日志
-```text
-2022-08-17 08:16:37+00:00 [Note] [Entrypoint]: Creating database nacos
-2022-08-17 08:16:37+00:00 [Note] [Entrypoint]: Creating user nacos
-2022-08-17 08:16:37+00:00 [Note] [Entrypoint]: Giving user nacos access to schema nacos
-
-2022-08-17 08:16:37+00:00 [Note] [Entrypoint]: /usr/local/bin/docker-entrypoint.sh: running /docker-entrypoint-initdb.d/nacos.sql
-
-
-2022-08-17 08:16:38+00:00 [Note] [Entrypoint]: /usr/local/bin/docker-entrypoint.sh: running /docker-entrypoint-initdb.d/seata.sql
-
-
-2022-08-17 08:16:38+00:00 [Note] [Entrypoint]: Stopping temporary server
-2022-08-17T08:16:38.408042Z 15 [System] [MY-013172] [Server] Received SHUTDOWN from user root. Shutting down mysqld (Version: 8.0.30).
-2022-08-17T08:16:41.122922Z 0 [System] [MY-010910] [Server] /usr/sbin/mysqld: Shutdown complete (mysqld 8.0.30)  MySQL Community Server - GPL.
-2022-08-17 08:16:41+00:00 [Note] [Entrypoint]: Temporary server stopped
-
-2022-08-17 08:16:41+00:00 [Note] [Entrypoint]: MySQL init process done. Ready for start up.
-
-2022-08-17T08:16:41.588526Z 0 [Warning] [MY-011068] [Server] The syntax '--skip-host-cache' is deprecated and will be removed in a future release. Please use SET GLOBAL host_cache_size=0 instead.
-2022-08-17T08:16:41.594886Z 0 [Warning] [MY-010918] [Server] 'default_authentication_plugin' is deprecated and will be removed in a future release. Please use authentication_policy instead.
-2022-08-17T08:16:41.594902Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.30) starting as process 1
-2022-08-17T08:16:41.621276Z 1 [System] [MY-013576] [InnoDB] InnoDB initialization has started.
-2022-08-17T08:16:42.583349Z 1 [System] [MY-013577] [InnoDB] InnoDB initialization has ended.
-2022-08-17T08:16:43.138237Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
-2022-08-17T08:16:43.138697Z 0 [System] [MY-013602] [Server] Channel mysql_main configured to support TLS. Encrypted connections are now supported for this channel.
-2022-08-17T08:16:43.166029Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
-2022-08-17T08:16:43.251536Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Bind-address: '::' port: 33060, socket: /var/run/mysqld/mysqlx.sock
-2022-08-17T08:16:43.251641Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.30'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
-```
-### 访问
-* localhost:3306
-* 账号密码：root/esafenet
-* 账号密码：nacos/nacos
-
 ## 启动 Nacos
 ### 文件与目录解释
 * .env 文件指定镜像版本
 * docker-compose.yml 启动脚本
 * nacos-standlone-mysql.env 初始配置，包括指定mysql信息等
 * init.d 初始化配置，可忽略
-### **你的**自定义配置
-.env HOSTIP=host.docker.internal 指向宿主机IP。如果启动失败，可以将此改为你本地IP
 ### 启动
 ```shell
 cd docker-compose\alibaba\nacos
@@ -116,7 +60,6 @@ Nacos is starting, you can docker logs your container
 * seata-server/resources/application.yml 初始化配置
 ### **你的**自定义配置
 .env -> HOSTIP=host.docker.internal 指向宿主机IP。如果启动失败，可以将此改为你本地IP
-application.yml -> server-addr 改为你本地IP
 ### 启动
 ```shell
 cd docker-compose\alibaba\seata

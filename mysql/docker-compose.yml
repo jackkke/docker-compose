@@ -15,3 +15,8 @@ services:
       - ./cnf:/etc/mysql/conf.d
       # 自定义初始化sql
       - ./init:/docker-entrypoint-initdb.d
+
+networks:
+  default:
+    name: zion
+    external: true

@@ -7,7 +7,7 @@ services:
     environment:
       - MYSQL_SERVICE_HOST=mysql
     env_file:
-      - ./nacos-standlone-mysql.env
+      - nacos-standlone-mysql.env
     volumes:
       - ~/docker_data/nacos/logs:/home/nacos/logs
       - ./init.d/custom.properties:/home/nacos/init.d/custom.properties
@@ -25,3 +25,4 @@ services:
 networks:
   default:
     name: zion
+    external: true
