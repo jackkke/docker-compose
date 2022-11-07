@@ -1,0 +1,111 @@
+version: ${VERSION}
+services:
+  master:
+    image: redis:${REDIS_TAG}
+    container_name: redis-master
+    restart: always
+    command: redis-server /etc/redis/redis1.conf
+    ports:
+      - 6379:6379
+    volumes:
+      # Failed trying to load the MASTER synchronization DB from disk
+      - redis-master:/data
+      - ./conf:/etc/redis
+    deploy:
+      resources:
+        limits:
+          memory: 16M
+  slave1:
+    image: redis:${REDIS_TAG}
+    container_name: redis-slave-1
+    restart: always
+    command: redis-server /etc/redis/redis2.conf
+    depends_on: [ master ]
+    ports:
+      - 6380:6379
+    volumes:
+      - redis-slave1:/data
+      - ./conf:/etc/redis
+    deploy:
+      resources:
+        limits:
+          memory: 16M
+  slave2:
+    image: redis:${REDIS_TAG}
+    container_name: redis-slave-2
+    restart: always
+    command: redis-server /etc/redis/redis3.conf
+    depends_on: [ master ]
+    ports:
+      - 6381:6379
+    volumes:
+      - redis-slave2:/data
+      - ./conf:/etc/redis
+    deploy:
+      resources:
+        limits:
+          memory: 16M
+  sentinel1:
+    image: redis:${REDIS_TAG}
+    container_name: redis-sentinel-1
+    restart: always
+    command: redis-sentinel /etc/redis/sentinel1.conf
+    depends_on: [ master, slave1, slave2 ]
+    ports:
+      - 26379:6379
+    volumes:
+      - redis-sentinel1:/data
+      - ./conf:/etc/redis
+    deploy:
+      resources:
+        limits:
+          memory: 16M
+  sentinel2:
+    image: redis:${REDIS_TAG}
+    container_name: redis-sentinel-2
+    restart: always
+    command: redis-sentinel /etc/redis/sentinel2.conf
+    depends_on: [ master, slave1, slave2 ]
+    ports:
+      - 26380:6379
+    volumes:
+      - redis-sentinel2:/data
+      - ./conf:/etc/redis
+    deploy:
+      resources:
+        limits:
+          memory: 16M
+  sentinel3:
+    image: redis:${REDIS_TAG}
+    container_name: redis-sentinel-3
+    restart: always
+    command: redis-sentinel /etc/redis/sentinel3.conf
+    depends_on: [ master, slave1, slave2 ]
+    ports:
+      - 26381:6379
+    volumes:
+      - redis-sentinel3:/data
+      - ./conf:/etc/redis
+    deploy:
+      resources:
+        limits:
+          memory: 16M
+
+volumes:
+  redis-master:
+    external: true
+  redis-slave1:
+    external: true
+  redis-slave2:
+    external: true
+  redis-sentinel1:
+    external: true
+  redis-sentinel2:
+    external: true
+  redis-sentinel3:
+    external: true
+
+networks:
+  default:
+    name: zion
+    external: true
