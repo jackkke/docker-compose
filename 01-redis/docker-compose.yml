@@ -14,7 +14,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 16M
+          memory: 32M
   slave1:
     image: redis:${REDIS_TAG}
     container_name: redis-slave-1
@@ -29,7 +29,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 16M
+          memory: 32M
   slave2:
     image: redis:${REDIS_TAG}
     container_name: redis-slave-2
@@ -44,7 +44,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 16M
+          memory: 32M
   sentinel1:
     image: redis:${REDIS_TAG}
     container_name: redis-sentinel-1
@@ -59,7 +59,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 16M
+          memory: 32M
   sentinel2:
     image: redis:${REDIS_TAG}
     container_name: redis-sentinel-2
@@ -74,7 +74,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 16M
+          memory: 32M
   sentinel3:
     image: redis:${REDIS_TAG}
     container_name: redis-sentinel-3
@@ -89,7 +89,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 16M
+          memory: 32M
 
 volumes:
   redis-master:
