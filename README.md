@@ -17,3 +17,6 @@ docker exec -it zookeeper /bin/sh
 cd bin
 zkServer.sh status
 ```
+
+deploy标签生效
+docker-compose --compatibility up
