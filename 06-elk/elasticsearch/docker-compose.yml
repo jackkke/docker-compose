@@ -1,0 +1,36 @@
+version: ${VERSION}
+services:
+  elasticsearch:
+    image: elasticsearch:${ES_TAG}
+    restart: always
+    container_name: elasticsearch
+    ports:
+      - 9200:9200
+      - 9300:9300
+    environment:
+      - "discovery.type=single-node"
+      # - "ES_JAVA_OPTS=-Xms512m -Xmx1096m" #设置使用jvm内存大小
+      - "xpack.security.enabled=false"
+      - "path.repo=[\"/data/es_bak/\"]"
+    deploy:
+      resources:
+        limits:
+          memory: 1536M
+    volumes:
+      - ./plugins:/usr/share/elasticsearch/plugins
+      - esdata:/usr/share/elasticsearch/data
+      - eslog:/user/share/elasticsearch/logs
+      - esbak:/data/es_bak
+
+volumes:
+  esdata:
+    external: true
+  eslog:
+    external: true
+  esbak:
+    external: true
+
+networks:
+  default:
+    name: zion
+    external: true

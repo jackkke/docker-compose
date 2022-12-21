@@ -58,3 +58,10 @@ docker volume create xxljob
 docker volume create mongodb
 ```
 
+## es
+
+```shell
+docker volume create esdata
+docker volume create eslog
+docker volume create esbak
+```
