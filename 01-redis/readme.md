@@ -47,7 +47,7 @@ master_failover_state:no-failover
 master_replid:5b6c8191a38b899dfe3586268537553da9357be2
 master_replid2:0000000000000000000000000000000000000000
 master_repl_offset:868
-second_repl_offset:-1
+second_repl_offset:-1[docker-compose.yml](..%2F00-base%2Fportainer%2Fdocker-compose.yml)
 repl_backlog_active:1
 repl_backlog_size:1048576
 repl_backlog_first_byte_offset:1

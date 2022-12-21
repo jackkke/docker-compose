@@ -227,14 +227,15 @@ INSERT INTO config_info (id, data_id, group_id, content, md5, gmt_create, gmt_mo
 store.db.datasource=druid
 store.db.dbType=mysql
 store.db.driverClassName=com.mysql.cj.jdbc.Driver
-store.db.url=jdbc:mysql://mysql:3306/test?useUnicode=true&characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useSSL=false
+store.db.url=jdbc:mysql://mysql:3306/nacos?useUnicode=true&characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useSSL=false
 store.db.user=nacos
-store.db.password=0815e3fcbe948b1e', '0cc218bced88cc5c22675630f82a439b', '2022-08-17 07:43:28', '2022-08-17 07:43:28', null, '192.168.16.1', '', '', 'seataServer.properties', null, null, 'properties', null, '');
+store.db.password=nacos', '0cc218bced88cc5c22675630f82a439b', '2022-08-17 07:43:28', '2022-08-17 07:43:28', null, '192.168.16.1', '', '', 'seataServer
+.properties', null, null, 'properties', null, '');
 
 INSERT INTO his_config_info (id, nid, data_id, group_id, app_name, content, md5, gmt_create, gmt_modified, src_user, src_ip, op_type, tenant_id, encrypted_data_key) VALUES (0, 1, 'seataServer.properties', 'DEFAULT_GROUP', '', 'store.mode=db
 store.db.datasource=druid
 store.db.dbType=mysql
 store.db.driverClassName=com.mysql.cj.jdbc.Driver
-store.db.url=jdbc:mysql://mysql:3306/test?useUnicode=true&characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useSSL=false
+store.db.url=jdbc:mysql://mysql:3306/nacos?useUnicode=true&characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useSSL=false
 store.db.user=nacos
-store.db.password=0815e3fcbe948b1e', '0cc218bced88cc5c22675630f82a439b', '2022-08-17 07:43:27', '2022-08-17 07:43:28', null, '192.168.16.1', 'I', '', '');
+store.db.password=nacos', '0cc218bced88cc5c22675630f82a439b', '2022-08-17 07:43:27', '2022-08-17 07:43:28', null, '192.168.16.1', 'I', '', '');

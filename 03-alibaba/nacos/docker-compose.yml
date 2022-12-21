@@ -6,10 +6,13 @@ services:
     restart: always
     environment:
       - MYSQL_SERVICE_HOST=mysql
+      # - NACOS_AUTH_ENABLE=true
+      - JVM_XMS=256m
+      - JVM_XMX=256m
     env_file:
       - nacos-standlone-mysql.env
     volumes:
-      - ~/docker_data/nacos/logs:/home/nacos/logs
+      - nacos:/home/nacos/logs
       - ./init.d/custom.properties:/home/nacos/init.d/custom.properties
     ports:
       - "8848:8848"
@@ -21,6 +24,10 @@ services:
     restart: always
     ports:
       - "8080:8858"
+
+volumes:
+  nacos:
+    external: true
 
 networks:
   default:

@@ -1,0 +1,22 @@
+version: ${VERSION}
+services:
+  xxljob:
+    image: xuxueli/xxl-job-admin:${XXLJOB_TAG}
+    restart: always
+    container_name: xxljob
+    ports:
+      - 18080:8080
+    environment:
+      PARAMS: "--spring.config.additional-location=/xxljob.yml"
+    volumes:
+      - xxljob:/data/applogs
+      - ./xxljob.yml:/xxljob.yml
+
+volumes:
+  xxljob:
+    external: true
+
+networks:
+  default:
+    name: zion
+    external: true

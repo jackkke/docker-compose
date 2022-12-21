@@ -37,3 +37,24 @@ docker volume create redis-sentinel3
 ```shell
 docker volume create mysql
 ```
+
+
+## NACOS
+
+```shell
+docker volume create nacos
+```
+
+
+## xxljob
+
+```shell
+docker volume create xxljob
+```
+
+## mongodb
+
+```shell
+docker volume create mongodb
+```
+

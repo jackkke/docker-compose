@@ -1,7 +1,5 @@
 version: ${VERSION}
-
 services:
-
   mongo:
     image: mongo:${MONGO_TAG}
     restart: always
@@ -13,7 +11,7 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: example
       MONGO_INITDB_DATABASE: yapi
     volumes:
-      - ~/docker_data/mongo/db:/data/db
+      - mongodb:/data/db
       - ./init:/docker-entrypoint-initdb.d/
 
   mongo-express:
@@ -30,6 +28,11 @@ services:
       ME_CONFIG_MONGODB_ADMINPASSWORD: example
       ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
 
+volumes:
+  mongodb:
+    external: true
+
 networks:
   default:
     name: zion
+    external: true

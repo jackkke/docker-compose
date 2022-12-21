@@ -15,7 +15,7 @@ services:
       # 注意公网ip和内网ip的差异。
       - SEATA_IP=${HOSTIP}
     volumes:
-      - "./seata-server/resources/application.yml:/seata-server/resources/application.yml"
+      - "./resources/application.yml:/seata-server/resources/application.yml"
 
 networks:
   default:
