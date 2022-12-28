@@ -2,4 +2,5 @@
 tempdata/
 temp/
 .idea/
-**/ddata/
+*.jar
+*.zip
