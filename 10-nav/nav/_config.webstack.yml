@@ -1,0 +1,127 @@
+favicon: /images/est-logo.png
+banner: /images/est.png
+
+logo:
+    expanded: /images/est.png
+    collapsed: /images/est-logo.png
+    dark: /images/est-logo.png
+
+flag:
+    - name: 中国
+      default: true
+      icon: flag-cn
+      index: /index.html
+
+search: false
+expandAll: false
+menu:
+    - name: 数据库
+      icon: fas fa-blog
+      config: db
+    - name: 常用工具
+      icon: far fa-star
+      config: devTools
+    - name: 管理工具
+      icon: fas fa-tools
+      config: manageTools
+#    - name: 其他工具
+#      icon: fas fa-tools
+#      submenu:
+#        - name: 开发工具
+#          icon: fas fa-tools
+#          config: devTools
+#        - name: 我的博客
+#          icon: fas fa-blog
+#          config: myBlog
+
+db:
+    - name: MySQL
+      url: mysql://192.168.30.126:3306
+      img: /images/icon/mysql.ico
+      description: 192.168.30.126:3306 root/esafenet
+    - name: Redis 主
+      url: redis://192.168.30.126:6379
+      img: https://redis.io/images/favicons/favicon-32x32.png
+      description: 192.168.30.126:6379 test
+    - name: Redis 哨兵
+      url: redis://192.168.30.126:26379
+      img: https://redis.io/images/favicons/favicon-32x32.png
+      description: 192.168.30.126:26379 24e86bf88d622ceb
+    - name: Mongo
+      url: mongo://192.168.30.126:27017
+      img: https://www.mongodb.com/assets/images/global/favicon.ico
+      description: root/example
+manageTools:
+    - name: Portainer
+      url: http://192.168.30.126:9000
+      img: http://192.168.30.126:9000/2dcfc527d067d4ae3424.png
+      description: admin/admin1234567
+devTools:
+    - name: Nacos
+      url: http://192.168.30.126:8848/nacos
+#      img: /images/icon/nacos.png
+      img: http://192.168.30.126:8848/nacos/console-ui/public/img/nacos-logo.png
+      description: nacos/nacos
+    - name: Seata
+      url: http://192.168.30.126:7091
+      img: http://192.168.30.126:7091/img/seata_logo.png
+      description: seata/seata
+    - name: Sentinel
+      url: http://192.168.30.126:8080
+      img: http://192.168.30.126:8080/assets/img/sentinel-logo.png
+      description: sentinel/sentinel
+    - name: XXL-JOB
+      url: http://192.168.30.126:18080/xxl-job-admin/
+      img: http://192.168.30.126:18080/xxl-job-admin/static/favicon.ico
+      description: admin/123456
+    - name: Yapi
+      url: http://192.168.30.126:3000
+      img: http://192.168.30.126:3000/image/favicon.png
+      description: 自行注册
+    - name: Elasticsearch
+      url: http://192.168.30.126:9200
+      img: http://126.est.jackkke.top:9200/favicon.ico
+      description: 无
+    - name: Mongo Express
+      url: http://192.168.30.126:8081
+      img: https://www.mongodb.com/assets/images/global/favicon.ico
+      description: express/express
+
+since: 2022
+busuanzi:
+    enable: false
+
+custom:
+    head: |- # 以下内容插入到<head></head>标签内，可设置多行，注意每行开头至少四个空格
+    # <!-- 直接添加html内容即可 -->
+    # <!-- 可设置多行 -->
+    body: |- # 以下内容插入到</body>标签之前，可设置多行，注意每行开头至少四个空格
+    # <!-- 直接添加html内容即可 -->
+    # <!-- 可设置多行 -->
+
+js:
+    header: /js/header.js
+    footer: /js/footer.js
+    jquery: /js/jquery-1.11.1.min.js
+    bootstrap: /js/bootstrap.min.js
+    TweenMax: /js/TweenMax.min.js
+    resizeable: /js/resizeable.min.js
+    joinable: /js/joinable.js
+    xenonApi: /js/xenon-api.min.js
+    xenonToggles: /js/xenon-toggles.min.js
+    xenonCustom: /js/xenon-custom.min.js
+    lozad: /js/lozad.min.js
+    html5shiv: /js/html5shiv.min.js
+    respond: /js/respond.min.js
+    busuanzi: https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js
+
+css:
+    hclonely: /css/hclonely.css
+    fonts: //fonts.loli.net/css?family=Arimo:400,700,400italic
+    linecons: /css/fonts/linecons/css/linecons.min.css
+    fontawesome: /css/fonts/fontawesome/css/all.min.css
+    bootstrap: /css/bootstrap.min.css
+    xenonCore: /css/xenon-core.min.css
+    xenonComponents: /css/xenon-components.min.css
+    xenonSkins: /css/xenon-skins.min.css
+    nav: /css/nav.min.css

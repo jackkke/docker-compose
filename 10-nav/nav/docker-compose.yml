@@ -1,0 +1,16 @@
+version: "3.9"
+services:
+  nav:
+    image: nav:latest
+    restart: always
+    container_name: nav
+    ports:
+      - 80:80
+    deploy:
+      resources:
+        limits:
+          memory: 32M
+networks:
+    default:
+        name: zion
+        external: true

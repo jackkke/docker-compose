@@ -56,6 +56,7 @@ docker volume create xxljob
 
 ```shell
 docker volume create mongodb
+docker volume create mongoconfigdb
 ```
 
 ## es

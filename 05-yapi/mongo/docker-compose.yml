@@ -12,6 +12,7 @@ services:
       MONGO_INITDB_DATABASE: yapi
     volumes:
       - mongodb:/data/db
+      - mongoconfigdb:/data/configdb
       - ./init:/docker-entrypoint-initdb.d/
 
   mongo-express:
@@ -30,6 +31,8 @@ services:
 
 volumes:
   mongodb:
+    external: true
+  mongoconfigdb:
     external: true
 
 networks:
