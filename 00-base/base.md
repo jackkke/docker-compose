@@ -66,3 +66,10 @@ docker volume create esdata
 docker volume create eslog
 docker volume create esbak
 ```
+
+
+## jenkins
+
+```shell
+docker volume create jenkins-data
+```
