@@ -1,0 +1,19 @@
+version: ${VERSION}
+services:
+  postgresql:
+    image: postgres:${POSTGRES_TAG}
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: example
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 5431:8080
+
+networks:
+  default:
+    name: zion
+    external: true
