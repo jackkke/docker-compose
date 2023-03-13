@@ -1,0 +1,61 @@
+version: '${VERSION}'
+services:
+  es1:
+    image: elasticsearch:${EK_VERSION}
+    container_name: es1
+    ports:
+      - 9200:9200
+      - 9300:9300
+    networks:
+      - elastic1
+    environment:
+      - node.name=es1
+      - cluster.name=es-docker-cluster
+      - discovery.seed_hosts=es2
+      - cluster.initial_master_nodes=es1,es2
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - data01:/usr/share/elasticsearch/data
+  es2:
+    image: elasticsearch:${EK_VERSION}
+    container_name: es2
+    networks:
+      - elastic1
+    environment:
+      - node.name=es2
+      - cluster.name=es-docker-cluster
+      - discovery.seed_hosts=es1
+      - cluster.initial_master_nodes=es1,es2
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - data02:/usr/share/elasticsearch/data
+  kibana:
+    image: kibana:${EK_VERSION}
+    container_name: kibana01
+    ports:
+      - 5601:5601
+    environment:
+      ELASTICSEARCH_HOSTS: http://es1:9200
+    networks:
+      - elastic1
+
+
+volumes:
+  data01:
+    driver: local
+  data02:
+    driver: local
+
+networks:
+  elastic1:
+    driver: bridge

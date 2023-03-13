@@ -1,0 +1,13 @@
+version: '3.9'
+services:
+  nexus3:
+    image: sonatype/nexus3:3.41.1
+    restart: always
+    container_name: nexus3
+    ports:
+      - 18081:8081
+      - 18082:8082
+      - 18083:8083
+    privileged: true
+    volumes:
+      - /home/docker/nexus-data:/nexus-data

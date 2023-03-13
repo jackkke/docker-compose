@@ -1,0 +1,23 @@
+version: ${VERSION}
+services:
+  skywalking:
+    image: apache/skywalking-oap-server:${SKYWALKING_TAG}
+    restart: always
+    container_name: skywalking
+    ports:
+      - 12800:12800
+      - 11800:11800
+  skywalkingui:
+    image: apache/skywalking-ui:${SKYWALKING_TAG}
+    restart: always
+    container_name: skywalkingui
+    ports:
+      - 18082:8080
+    environment:
+      SW_OAP_ADDRESS: 'http://skywalking:12800'
+      SW_TIMEOUT: 20000
+
+networks:
+  default:
+    name: zion
+    external: true
