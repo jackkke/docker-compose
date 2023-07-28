@@ -17,7 +17,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 32M
+          memory: 128M
   registry-web:
     image: konradkleine/docker-registry-frontend:${REGISTRY_FRONTEND_TAG}
     restart: always
@@ -35,7 +35,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 32M
+          memory: 128M
 
 volumes:
   registry:
