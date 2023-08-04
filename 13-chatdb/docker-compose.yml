@@ -1,0 +1,18 @@
+version: ${VERSION}
+services:
+  chatdb:
+    image: chat2db/chat2db:${CHATDB_TAG}
+    restart: always
+    ports:
+      - 10824:10824
+    volumes:
+      - chat2db:/root/.chat2db
+
+volumes:
+  chat2db:
+    external: true
+
+networks:
+  default:
+    name: zion
+    external: true

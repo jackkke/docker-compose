@@ -73,3 +73,9 @@ docker volume create esbak
 ```shell
 docker volume create jenkins-data
 ```
+
+## chatdb
+
+```shell
+docker volume create chatdb
+```
